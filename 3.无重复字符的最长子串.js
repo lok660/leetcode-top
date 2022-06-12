@@ -14,18 +14,24 @@
 
 // 思路:
 // 1.创建一个max，用来存储最大值,创建一个map，用来存储字符串中的字符和下标,创建一个start，用来存储字符串的起始下标
-// 2.遍历字符串，如果map中不存在
+// 2.遍历字符串，如果map中存在当前字符，则将start设置为当前字符的下标+1，并将map中的当前字符的下标设置为当前下标
+// 3.如果map中不存在当前字符，则将map中的当前字符的下标设置为当前下标
 
 var lengthOfLongestSubstring = function (s) {
-  let max = 0;
-  let map = {};
-  let start = 0;
+  let max = 0; // 最大值
+  let map = {}; // 存储字符串中的字符和下标
+  let start = 0; // 字符串的起始下标
   for (let i = 0; i < s.length; i++) {
     if (map[s[i]] !== undefined) {
-      start = Math.max(start, map[s[i]] + 1);
+      start = Math.max(start, map[s[i]] + 1); // 如果map中存在当前字符，则将start设置为当前字符的下标+1，并将map中的当前字符的下标设置为当前下标
     }
-    map[s[i]] = i;
+    map[s[i]] = i; // 将map中的当前字符的下标设置为当前下标
     max = Math.max(max, i - start + 1);
   }
   return max;
 }
+
+// 测试
+let s = "abcabcbb";
+debugger
+console.log(lengthOfLongestSubstring(s));
